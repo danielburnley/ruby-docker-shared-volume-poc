@@ -1,0 +1,39 @@
+version: "3"
+services:
+  downloader:
+    build: .
+    volumes:
+      - ./app:/app
+      - ./transit:/transit
+    ports:
+      - "4567:4567"
+    command: "bundle exec ruby lib/app.rb -o 0.0.0.0"
+    privileged: true
+    environment:
+      DOWNLOAD_PATH: '/transit'
+
+  organiser:
+    build: .
+    volumes:
+      - ./app:/app
+      - ./transit:/transit
+      - ./storage:/storage
+    ports:
+      - "4568:4567"
+    command: "bundle exec ruby lib/app.rb -o 0.0.0.0"
+    privileged: true
+    environment:
+      DOWNLOAD_PATH: '/transit'
+      CONSUMER_PATH: '/storage'
+
+  consumer:
+    build: .
+    volumes:
+      - ./app:/app
+      - ./storage:/storage
+    ports:
+      - "4569:4567"
+    command: "bundle exec ruby lib/app.rb -o 0.0.0.0"
+    privileged: true
+    environment:
+      CONSUMER_PATH: '/storage'
