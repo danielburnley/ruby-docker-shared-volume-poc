@@ -15,3 +15,5 @@ organise:
 
 consume:
 	curl localhost:4569/consume
+
+all: download organise consume

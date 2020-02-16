@@ -6,6 +6,8 @@ Serve:
 
 Triggers:
 
+`make all` - Runs all the steps 
+
 `make download` - Simulates a download to transit
 
 `make organise` - Simulates moving a file from transit to storage
